@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below. A manuscript is in preparation."
+title: "GateXer: Gated Joint Forecasting of Electricity Load, Solar and Wind"
+type: software
+authors:
+  - family-names: Kumar
+    given-names: Alok
+    affiliation: "National Institute of Technology, Rourkela"
+version: 0.1.0
+date-released: 2026-11-04
+license: MIT
+keywords:
+  - time-series forecasting
+  - multi-task learning
+  - Transformer
+  - load forecasting
+  - solar forecasting
+  - wind forecasting

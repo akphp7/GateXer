@@ -1,0 +1,10 @@
+Weather points (latitude, longitude) averaged per grid. Source: Open-Meteo archive API (ERA5-based), hourly:
+temperature_2m, wind_speed_100m (m/s), shortwave_radiation (global horizontal irradiance), cloud_cover.
+EIA timestamps are UTC; Grid-India timestamps are IST.
+
+ERCOT : (29.76,-95.37) (32.78,-96.80) (29.42,-98.49) (33.58,-101.86) (31.99,-102.08)
+CAISO : (34.05,-118.24) (37.77,-122.42) (36.74,-119.79) (35.37,-119.02) (34.90,-117.02)
+SWPP  : (35.47,-97.52) (37.69,-97.34) (35.22,-101.83) (41.26,-95.93) (39.10,-94.58)
+MISO  : (41.88,-87.63) (44.98,-93.27) (41.59,-93.62) (39.77,-86.16) (42.33,-83.05) (29.95,-90.07)
+India : (26.24,73.02) (23.25,69.67) (11.02,76.96) (12.97,77.59) (28.61,77.21) (19.08,72.88) (13.08,80.27) (22.57,88.36) (14.68,77.60)
+(OPSD European grids use the weather supplied with the OPSD package: temperature, direct and diffuse radiation.)
