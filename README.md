@@ -4,7 +4,7 @@ GateXer forecasts the next 24 hours of **electricity load, solar generation and 
 It starts as three independent forecasters and learns, through a small router and zero-initialised gates, **where sharing information with the other sources and with the weather actually lowers the error**. Nothing is forced to share.
 
 > **Status:** M.Tech research project at the National Institute of Technology, Rourkela. The manuscript is in preparation.
-> Authors: Alok Kumar and Manmath N. Sahoo, Wireless Networks & Computing Laboratory, Department of Computer Science & Engineering, National Institute of Technology Rourkela.
+> Authors: Alok Kumar and Prof. Manmath N. Sahoo, Wireless Networks & Computing Laboratory, Department of Computer Science & Engineering, National Institute of Technology Rourkela.
 
 ![GateXer overview](figures/Fig1_GateXer_overview.png)
 
