@@ -1,10 +1,13 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite it as below. A manuscript is in preparation."
-title: "GateXer: Gated Joint Forecasting of Electricity Load, Solar and Wind"
+title: "GateXer: Routed Cross-Attention for Multi-Task Forecasting of Load, Solar and Wind"
 type: software
 authors:
   - family-names: Kumar
     given-names: Alok
+    affiliation: "National Institute of Technology, Rourkela"
+  - family-names: Sahoo
+    given-names: Manmath N.
     affiliation: "National Institute of Technology, Rourkela"
 version: 0.1.0
 date-released: 2026-11-04
