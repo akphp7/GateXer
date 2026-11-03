@@ -12,9 +12,19 @@ It starts as three independent forecasters and learns, through a small router an
 
 Joint load/solar/wind models usually share one encoder between all targets. That helps some targets and can hurt others (negative transfer). Most are also tested on one dataset against older baselines. GateXer asks a narrower question: **can a model learn where to share, and is that better than fixed sharing?** We test it on 11 grids against the official PatchTST, iTransformer and TimeXer implementations under one protocol.
 
-## Main results
+## Highlights
 
-Lower normalised MAE (nMAE = MAE / mean actual) is better. "Gain" is the relative error reduction of a 3-seed GateXer ensemble over the strongest official baseline (also a 3-seed ensemble) on the same grid. 95% paired-bootstrap intervals are in `docs/results_tables.md`.
+* **Lowest error on all 11 power grids** (4 U.S. operators, 7 European countries) against the official PatchTST, iTransformer, TimeXer, DLinear and a seasonal-naive forecast.
+* **4.8% lower error on average** than the strongest baseline (2.4% to 8.4% per grid), with 95% bootstrap intervals above zero on every grid.
+* **Largest gains for solar (8.6%) and load (6.2%);** the model learns where sharing with other sources and with weather helps instead of forcing it.
+* **Small and fast:** 633 k parameters, about 100 s per training run on a free Kaggle GPU.
+* Honest, leak-free protocol: chronological split, validation-only selection, same inputs and tuning grid for every baseline, 3 seeds, paired bootstrap.
+
+## Results at a glance
+
+nMAE = MAE / mean actual (lower is better). Gain = relative error reduction of a 3-seed GateXer ensemble over the strongest official baseline on that grid (also a 3-seed ensemble). Grey in the plot is the all-India stress case, discussed in [`docs/SCOPE_AND_FUTURE_WORK.md`](docs/SCOPE_AND_FUTURE_WORK.md).
+
+<p align="center"><img src="figures/FigA_gain_per_grid.png" width="62%" alt="nMAE gain of GateXer over the strongest official baseline per grid"></p>
 
 | Grid | GateXer nMAE | Strongest baseline | Its nMAE | Gain |
 |---|---|---|---|---|
@@ -30,13 +40,31 @@ Lower normalised MAE (nMAE = MAE / mean actual) is better. "Gain" is the relativ
 | Austria | 0.2587 | TimeXer | 0.2653 | 2.5% |
 | Greece | 0.1787 | iTransformer | 0.1891 | 5.5% |
 
-* GateXer has the lowest error on all 11 grids (mean gain 4.8%, range 2.4 to 8.4%). Every bootstrap interval is above zero.
-* Mean gains by target: solar 8.6%, load 6.2%, wind 2.3%.
-* **A simple "yesterday-correction"** (predict the change from the same hour 24 h earlier) helps every model. When all models use it, **GateXer ties the best baseline (TimeXer)**: differences of 0.1 to 1.4% with intervals that include zero on all five grids tested. We report this as a tie, not a win.
-* An ablation separates sharing with other sources from sharing with weather. Both contribute, in different amounts on different grids (`docs/RESULTS.md`).
-* **Limitation:** on the all-India series, where the solar level tripled over the years, GateXer has no advantage (-0.1%, interval [-4.0, 3.5]). It is reported as a stress case and not included in the average.
+### A week of 24-hour forecasts (ERCOT, test period)
 
-More detail, figures and caveats: [`docs/RESULTS.md`](docs/RESULTS.md) and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md).
+GateXer follows the daily load cycle, the solar peaks and the wind ramps more closely than the strongest baselines.
+
+![One test week of ERCOT forecasts](figures/FigD_week.png)
+
+### Where the gains come from
+
+<p align="center">
+<img src="figures/FigB_gain_per_target.png" width="48%" alt="Gain per target">
+<img src="figures/FigC_horizon.png" width="48%" alt="Error by forecast horizon">
+</p>
+
+* Solar gains the most (8.6%), then load (6.2%), then wind (2.3%).
+* GateXer is the best model from the middle of the 24-hour horizon onward (6 h: 0.153 against 0.163 for the best baseline; 24 h: 0.236 against 0.243).
+
+### Sharing with sources and with weather, learned by the gates
+
+Both routes contribute, in different amounts on different grids. A single fixed design cannot be best everywhere, which is why GateXer lets gates decide.
+
+<p align="center"><img src="figures/FigG_ablation_sharing.png" width="70%" alt="Ablation of sharing"></p>
+
+### A simple trick that helps every model
+
+Predicting the change from the same hour 24 h earlier (the *yesterday-correction*) lowers the error of every model by 3% to 9%. When all models use it, GateXer matches the strongest baseline, TimeXer, and stays ahead of iTransformer and PatchTST on four of five grids. Details in [`docs/RESULTS.md`](docs/RESULTS.md).
 
 ## How it works
 
@@ -87,6 +115,10 @@ Reproducing the real experiments (data download, weather, the exact commands for
 * A model with the yesterday-correction is only ever compared with other corrected models.
 
 Details: [`docs/PROTOCOL.md`](docs/PROTOCOL.md).
+
+## Scope
+
+The study covers 11 grids and 24-hour point forecasts with observed weather inputs, plus one all-India stress case. What is not covered, and the planned next steps, are listed in [`docs/SCOPE_AND_FUTURE_WORK.md`](docs/SCOPE_AND_FUTURE_WORK.md).
 
 ## Citation
 

@@ -29,7 +29,7 @@ data/
 
 * **European grids (OPSD):** the weather columns supplied with the OPSD package (temperature, direct and diffuse radiation). OPSD weather ends in December 2019, so the OPSD series are 2015 to 2019.
 * **U.S. grids and India:** `gatexer/add_weather.py` downloads Open-Meteo hourly values and **averages 5 to 6 points per grid (9 for India)**, chosen in representative load, solar and wind areas. The exact coordinates are in [`weather_locations.txt`](weather_locations.txt). Timestamps: EIA in UTC, Grid-India in IST.
-* **Observed, not forecast:** the weather values are historical observations for the same hours as the target. In real operation only forecasts are available, which carry errors. This is a standard simplification, applied identically to all models; see `LIMITATIONS.md`.
+* **Observed, not forecast:** the weather values are historical observations for the same hours as the target. In real operation only forecasts are available, which carry errors. This is a standard simplification, applied identically to all models; see `SCOPE_AND_FUTURE_WORK.md`.
 
 ## Time ranges
 

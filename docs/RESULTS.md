@@ -113,4 +113,4 @@ On Germany, always-on mixing is clearly worse than independent forecasters while
 
 ## 9. Stress case: all-India series
 
-Gain over the strongest baseline in the plain protocol: -0.1% (interval [-4.0, 3.5]). See `LIMITATIONS.md`.
+Gain over the strongest baseline in the plain protocol: -0.1% (interval [-4.0, 3.5]). See `SCOPE_AND_FUTURE_WORK.md`.
